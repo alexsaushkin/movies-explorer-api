@@ -1,4 +1,6 @@
 const allowedCors = [
+  'http://api.movies-thirdyou.nomoredomains.rocks',
+  'https://api.movies-thirdyou.nomoredomains.rocks',
   'http://localhost:3000',
   'https://51.250.83.2',
   'http://51.250.83.2',
