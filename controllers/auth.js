@@ -1,3 +1,8 @@
+const User = require('../models/users');
+const BadRequestError = require('../errors/BadRequestError');
+const ConflictError = require('../errors/ConflictError');
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports.signup = (req, res, next) => {
   const {
     name, email, password,
@@ -13,7 +18,7 @@ module.exports.signup = (req, res, next) => {
       res.status(201).send(data);
     })
     .catch((err) => {
-      if (err instanceof ValidationError) {
+      if (err.name ===  'ValidationError') {
         next(new BadRequestError('Неправильные данные'));
       } else if (err.code === 11000) {
         next(new ConflictError('Данный email уже зарегистрирован'));

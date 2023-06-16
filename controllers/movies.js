@@ -62,10 +62,10 @@ module.exports.deleteMovie = (req, res, next) => {
       if (movie.owner.toString() !== req.user._id) {
         throw new ForbiddenError('Нельзя удалять фильмы других пользователей.');
       } else {
-        movie.deleteOne();
-        res.send(movie);
+        movie.deleteOne()
       }
     })
+    .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
         next(new NotFoundError('Карточка не найдена.'));
