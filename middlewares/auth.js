@@ -3,7 +3,7 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-module.exports.login = (req, res, next) => {
+module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
   if (!token) {
     return next(new UnauthorizedError('Пользователь не авторизован!'));
