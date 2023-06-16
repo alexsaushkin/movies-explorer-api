@@ -4,7 +4,7 @@ const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
 
 module.exports.getMovies = (req, res, next) => {
-  Movies.find({ owner: req.user._id })
+  Movie.find({ owner: req.user._id })
     .orFail()
     .then((movies) => res.send(movies))
     .catch((err) => {
@@ -48,7 +48,7 @@ module.exports.createMovie = (req, res, next) => {
     .then((movie) => res.status(201).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Неправильные данные'));
+        next(new BadRequestError('Неправильные данные'));
       } else {
         next(err);
       }
@@ -62,7 +62,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (movie.owner.toString() !== req.user._id) {
         throw new ForbiddenError('Нельзя удалять фильмы других пользователей.');
       } else {
-        movie.deleteOne()
+        return movie.deleteOne();
       }
     })
     .then((movie) => res.send(movie))

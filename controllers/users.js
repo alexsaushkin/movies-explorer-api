@@ -6,15 +6,15 @@ const ConflictError = require('../errors/ConflictError');
 module.exports.getProfile = async (req, res, next) => {
   const userId = req.user._id;
   User.findById(userId)
-  .orFail()
-  .then((user) => res.send(user))
-  .catch((err) => {
-    if (err.name === 'DocumentNotFoundError') {
-      next(new NotFoundError('Пользователь не найден.'));
-    } else {
-      next(err);
-    }
-  });
+    .orFail()
+    .then((user) => res.send(user))
+    .catch((err) => {
+      if (err.name === 'DocumentNotFoundError') {
+        next(new NotFoundError('Пользователь не найден.'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 module.exports.updateProfile = (req, res, next) => {
