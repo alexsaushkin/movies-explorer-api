@@ -1,9 +1,9 @@
 const allowedCors = [
-  'http://api.movies-thirdyou.nomoredomains.rocks',
-  'https://api.movies-thirdyou.nomoredomains.rocks',
+  'http://movies-thirdyou.nomoredomains.work',
+  'https://movies-thirdyou.nomoredomains.work',
   'http://localhost:3000',
-  'https://51.250.83.2',
-  'http://51.250.83.2',
+  'https://158.160.105.238',
+  'http://158.160.105.238',
 ];
 
 module.exports = (req, res, next) => {
