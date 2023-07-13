@@ -46,7 +46,8 @@ module.exports.signin = (req, res, next) => {
       );
       res.cookie('jwt', token, {
         httpOnly: true,
-        sameSite: true,
+        sameSite: "none",
+          secure: true,
         maxAge: 3600000 * 24 * 7,
       });
       res.send({ message: 'Успешный вход' });
