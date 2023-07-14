@@ -49,6 +49,7 @@ module.exports.signin = (req, res, next) => {
         sameSite: 'none',
         secure: true,
         maxAge: 3600000 * 24 * 7,
+        domain: 'api.movies-thirdyou.nomoredomains.rocks',
       });
       res.send({ message: 'Успешный вход' });
     })
