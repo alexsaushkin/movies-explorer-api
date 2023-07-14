@@ -4,7 +4,7 @@ const User = require('../models/users');
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const {NODE_ENV, JWT_SECRET} = process.env;
 
 module.exports.signup = (req, res, next) => {
   const {
@@ -32,7 +32,7 @@ module.exports.signup = (req, res, next) => {
 };
 
 module.exports.signin = (req, res, next) => {
-  const { email, password } = req.body;
+  const {email, password} = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
@@ -49,14 +49,16 @@ module.exports.signin = (req, res, next) => {
         sameSite: 'none',
         secure: true,
         maxAge: 3600000 * 24 * 7,
-        domain: 'api.movies-thirdyou.nomoredomains.rocks',
       });
-      res.send({ message: 'Успешный вход' });
+      res.send({message: 'Успешный вход'});
     })
     .catch(next);
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie('jwt', { domain: 'api.movies-thirdyou.nomoredomains.rocks', path: '/' });
+  res.clearCookie('jwt', {
+    sameSite: 'none',
+    secure: true,
+  });
   res.send({ message: 'Успешный выход' });
 };
