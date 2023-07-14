@@ -15,7 +15,6 @@ const router = require('./routes/index');
 
 const cors = require('./middlewares/cors');
 const limiter = require('./middlewares/limiter');
-const errors = require('./middlewares/errors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000, DB_CONNECT = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
@@ -36,7 +35,6 @@ app.use(requestLogger);
 app.use('/', router);
 app.use(errorLogger);
 app.use(validationErrors());
-app.use(errors);
 
 app.use((err, req, res, next) => {
   const { statusCode = ERROR_DEFAULT, message = MESSAGE_DEFAULT } = err;
