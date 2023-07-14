@@ -4,12 +4,13 @@ const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
 
 module.exports.getMovies = (req, res, next) => {
+  console.log(req.user._id);
   Movie.find({ owner: req.user._id })
     .orFail()
     .then((movies) => res.send(movies))
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
-        next(new NotFoundError('Пользователь не найден.'));
+        next(new NotFoundError(err.message));
       } else {
         next(err);
       }
