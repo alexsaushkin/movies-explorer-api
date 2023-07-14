@@ -57,6 +57,6 @@ module.exports.signin = (req, res, next) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie('jwt');
+  res.clearCookie('jwt', { domain: 'api.movies-thirdyou.nomoredomains.rocks', path: '/' });
   res.send({ message: 'Успешный выход' });
 };
