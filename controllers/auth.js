@@ -46,10 +46,8 @@ module.exports.signin = (req, res, next) => {
       );
       res.cookie('jwt', token, {
         httpOnly: true,
-        sameSite: 'none',
-        secure: true,
+        sameSite: true,
         maxAge: 3600000 * 24 * 7,
-        path: '/',
       });
       res.send({ message: 'Успешный вход' });
     })
@@ -57,6 +55,6 @@ module.exports.signin = (req, res, next) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie('jwt');
+  res.clearCookie('jwt', );
   res.send({ message: 'Успешный выход' });
 };
